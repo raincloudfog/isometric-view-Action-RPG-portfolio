@@ -1,0 +1,62 @@
+{
+    "name": "StageManager",
+    "maps": [
+        {
+            "name": "StageManager",
+            "id": "0632075b-03c3-416b-ad40-ba5d9fd179a9",
+            "actions": [
+                {
+                    "name": "CheckKey",
+                    "type": "Button",
+                    "id": "53c8853b-9ff5-46bd-8971-efcfbb2e5d9a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d0743188-0d74-4d2d-b2d3-c49a4bf12cbe",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "CheckKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d42fd967-2780-4d9a-acdc-96e7db01056b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "CheckKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "PC",
+            "bindingGroup": "PC",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

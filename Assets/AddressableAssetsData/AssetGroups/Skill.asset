@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Skill
+  m_EditorClassIdentifier: 
+  m_GroupName: Skill
+  m_Data:
+    m_SerializedData: []
+  m_GUID: a47ef2baf07aadd4997e2fe56ae86c92
+  m_SerializeEntries:
+  - m_GUID: aa8913342e935e144b3775a12da3a945
+    m_Address: Assets/Package/Skill/Ground Hit.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Skill
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77cc781821377f6478a8de987559cc31
+    m_Address: Assets/Package/Skill/Heal.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Skill
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 798c048918c386848a162d6878e2e1d5
+    m_Address: Assets/Package/Skill/Starfall.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Skill
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4007c6e4b45d0674591bedb42d0dd90f
+    m_Address: Assets/Package/Skill/Teleport.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Skill
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: dad37fb1abb7e934181a19b105dbe965, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4ac763e6abc11a34bb728b5193c249d6, type: 2}
+    - {fileID: 11400000, guid: fdfefdbfd4dc49f469a81358949fb7f6, type: 2}
