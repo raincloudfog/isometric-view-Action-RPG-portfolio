@@ -22,7 +22,7 @@ namespace Skills
             Collider[] collider = Physics.OverlapSphere(transform.position, radius, TargetLayer);
             foreach (Collider other in collider)
             {
-                Debug.Log(other);
+                //Debug.Log(other);
                 other.GetComponent<Monster>().Hit(damage);
             }
 

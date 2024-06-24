@@ -20,8 +20,14 @@ namespace Skills
         public ParticleSystem skillEffect;
 
         public Vector3 skillPos;
-        public float CoolTime = 0;
+        public int CoolTime = 0;
+        public float CoolTimer = 0;
+        [SerializeField]
         protected int Damage = 10;
+        public int Manacost = 0;
+
+        //스킬 사용 가능한지
+        public bool isActive = true;
 
         protected Player.Player player;
 
@@ -36,7 +42,7 @@ namespace Skills
         public virtual void Init(P player)
         {
             this.player = player;
-            Damage = Player.Stat.Damage;
+            Damage = player.stat.Damage;
             SetSkill();
             //Debug.Log(gameObject.name + " 스킬 현재 데미지 : " + Damage);
         }
@@ -49,7 +55,7 @@ namespace Skills
 
         public virtual void Use()
         {
-            
+         //   Debug.Log(name + "발동");
         }
 
         public virtual void OnParticleCollision(GameObject other)

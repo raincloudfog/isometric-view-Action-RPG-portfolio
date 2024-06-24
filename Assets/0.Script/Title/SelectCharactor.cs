@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SelectCharactor : MonoBehaviour, IPointerClickHandler
 {
@@ -17,6 +18,7 @@ public class SelectCharactor : MonoBehaviour, IPointerClickHandler
 
     private int clickCount = 0;
 
+    public Button _deleteButton;
 
     //세이브가 있는지
     public bool isSave;
@@ -33,7 +35,7 @@ public class SelectCharactor : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("세이브 이름  + [" + SaveManager.Instance.saveName.Name[id] + "]");
+        _deleteButton.onClick.AddListener(DeleteButton);
         isSave = SaveManager.Instance.saveName.Name[id] != "";
         //이런식으로 하면 비활성화되어있는 오브젝트도 담기가능.
         texts = GetComponentsInChildren<TMP_Text>(true);
@@ -44,19 +46,40 @@ public class SelectCharactor : MonoBehaviour, IPointerClickHandler
         }
     }
         
+    void DeleteButton()
+    {
+        if(isSave == false)
+        {
+            return;
+        }
+
+        GameData.playerNumber = id;
+        SaveManager.Instance.DeleteSave();
+
+        plate.gameObject.SetActive(false);
+        texts[0].gameObject.SetActive(false);
+        texts[1].gameObject.SetActive(false);        
+        texts[2].gameObject.SetActive(true);
+
+
+        isSave = false;
+
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         // 클릭된 버튼 확인
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if(DoubleClickCoroutine == null)
+            GameData.playerNumber = id;
+            if (DoubleClickCoroutine == null)
             {
                 StartCoroutine(DoubleClick());
             }
 
             if(isSave == false)
             {
+                
                 _titleManager.OnOffNewCharactor(true);
                 //CreateCharactor();
             }
@@ -64,7 +87,6 @@ public class SelectCharactor : MonoBehaviour, IPointerClickHandler
             {
                 clickCount++;
             }
-            Debug.Log("Left button clicked");
         }
     }
 
@@ -80,7 +102,6 @@ public class SelectCharactor : MonoBehaviour, IPointerClickHandler
         texts[0].gameObject.SetActive(true);
         texts[1].gameObject.SetActive(true);
         texts[0].text =  "Name : "+ Name;
-        texts[1].text = "Lv : " + 1;
         texts[2].gameObject.SetActive(false);
 
 
@@ -98,7 +119,6 @@ public class SelectCharactor : MonoBehaviour, IPointerClickHandler
             if (clickCount >= 2)
             {
                 GameData.playerNumber = id;
-                SaveManager.Instance.Load();
                 ChangeScene();
             }
         }

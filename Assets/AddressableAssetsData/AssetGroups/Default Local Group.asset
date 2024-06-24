@@ -16,12 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 510d621719897ee49b94c44b81159faa
-  m_SerializeEntries:
-  - m_GUID: a2bb5249cbe1e2b43a91e9c47a00ad15
-    m_Address: Assets/Package/UI/LodingCanvas.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: dad37fb1abb7e934181a19b105dbe965, type: 2}
   m_SchemaSet:

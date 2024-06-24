@@ -114,18 +114,16 @@ namespace Monster
                 return;
             }
 
+
+
+            float sqr = Vector3.SqrMagnitude(monster.transform.position - Target.position);
             //사거리확인
-            if (Vector3.Distance( monster.transform.position, Target.position) <= monster.Range)
+            if (sqr <= monster.Range - 1)
             {
                 monster.agent.isStopped = true;
-                Player.Player player = Target.GetComponent<Player.Player>();
+                
                 monster.anim.SetTrigger("attack");
-
-                if(AttackCheck())
-                {
-                    Debug.Log("한대때림");
-                    player.Hit(monster.Damage);
-                }
+                
             }
             else
             {
@@ -150,11 +148,14 @@ namespace Monster
     {
         public FSMDeath(Monster monster) : base(monster)
         {
+            
         }
 
         public override void OnEnter()
         {
+
             monster.anim.SetTrigger("death");
+            monster.Drop();
             monster.agent.isStopped = true;
         }
 

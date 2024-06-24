@@ -20,7 +20,8 @@ public class SceneLoaderManager : Singleton<SceneLoaderManager>
               
     }
 
-    public string CanvasAddress;
+    public string CanvasLabel = "LoadingCanvas";
+    [SerializeField]
     Canvas lodingCanvas;
 
     // Start is called before the first frame update
@@ -29,76 +30,139 @@ public class SceneLoaderManager : Singleton<SceneLoaderManager>
 
     }
 
-    //로딩 씬에서 가져올 로딩 캔버스
-    async Task LoadingCanvasLoad()
+    //로딩 씬에서 가져올 로딩 캔버스 // 굳이 사용할 필요 없을거같음.
+    /*async Task LoadingCanvasLoad()
     {
-        AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(CanvasAddress);
-        //Debug.Log(handle);
+        AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(CanvasLabel);
 
         await handle.Task;
-        Debug.Log(handle.Status);
-        if(handle.Status == AsyncOperationStatus.Succeeded)
+
+        if (handle.Status == AsyncOperationStatus.Succeeded)
         {
-            Debug.Log(handle.Result);
-            lodingCanvas = Instantiate( handle.Result.GetComponent<Canvas>());
+            GameObject loadedObject = handle.Result;
+
+            if (loadedObject != null)
+            {
+                //Debug.Log("로드 성공: " + loadedObject.name);
+
+                // 예시로 Canvas 컴포넌트를 가져와서 활성화합니다.
+                Canvas canvasComponent = loadedObject.GetComponent<Canvas>();
+                if (canvasComponent != null)
+                {
+                    lodingCanvas = Instantiate(canvasComponent);
+                    loadedObject.SetActive(true);
+
+                    Image[] imgs = lodingCanvas.GetComponentsInChildren<Image>();
+
+                    for (int i = 0; i < imgs.Length; i++)
+                    {
+                        Debug.Log(imgs[i].sprite + "이미지 스프라이트확인");
+                        if (imgs[i].sprite == null)
+                            Debug.Log("이미지 스프라이트 널임");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("로드이미지는성공했는데 게임오브젝트에 캔버스가 없음");
+                }
+            }
+            else
+            {
+                Debug.LogError("로드이미지는 성공 오브젝트가 널임");
+            }
         }
         else
         {
-            Debug.Log("실패");
+            Debug.LogError("로드 이미지 불러오기 실패: " + handle.OperationException);
         }
+
         Addressables.Release(handle);
+    }*/
+
+    public void LoadScene(SceneName sceneName)
+    {
+        StartCoroutine(LoadSceneCoroutine(sceneName));
     }
 
-    public async void LoadScene(SceneName sceneName)
+    public async void LoadSceneAsyncMethod(SceneName sceneName)
     {
         await LoadSceneAsync(sceneName);
-        SaveManager.Instance.Load();
+        
     }
 
-    async Task LoadSceneAsync(SceneName sceneName)
+    IEnumerator LoadSceneCoroutine(SceneName sceneName)
     {
         // 현재 씬 저장
         Scene currentScene = SceneManager.GetActiveScene();
         // 로딩 씬 로드
         SceneManager.LoadScene("LoadingScene");
 
-        await LoadingCanvasLoad();
-        await SettingManager.Instance.LoadAsset();
-        
+        // SettingManager의 LoadAsset 호출을 기다림
+        //yield return StartCoroutine( SettingManager.Instance.LoadAssetCoroutine());
 
-        //Image loadingbar = lodingCanvas.transform.Find("Bar").GetComponent<Image>();
+         // SaveManager 초기화
+         SaveManager.Instance.Init();
+
+        // 예: 1초 동안 로딩 씬을 보여줌
+        yield return new WaitForSeconds(1f);
+
+        // 새로운 씬 비동기 로드
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName.ToString());
+        asyncOperation.allowSceneActivation = false;
+
+        // 로딩 상태 체크 및 업데이트
+        while (!asyncOperation.isDone)
+        {
+            if (asyncOperation.progress >= 0.9f)
+            {
+                Debug.Log("다음 씬으로 이동");
+                // 이전 씬과 로딩 씬 언로드
+                asyncOperation.allowSceneActivation = true;
+            }
+            yield return null; // 비동기 루프에서 다른 작업이 실행될 수 있도록
+        }
+        SettingManager.Instance.skillfind();
+
+        SkillManager.Instance.SkillSet();
+        PlayManager.Instance.Init();
+        ItemManager.Instance.Init();
+    }
+     async Task LoadSceneAsync(SceneName sceneName)
+    {
+        // 현재 씬 저장
+        Scene currentScene = SceneManager.GetActiveScene();
+        // 로딩 씬 로드
+        SceneManager.LoadScene("LoadingScene");
+
+        //await LoadingCanvasLoad();
+        //await SettingManager.Instance.LoadAsset();
+
+        SaveManager.Instance.Init();
 
         await Task.Delay(1000); // 예: 1초 동안 로딩 씬을 보여줌
 
 
         // 새로운 씬 비동기 로드
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName.ToString());
-         asyncOperation.allowSceneActivation = false;
+            asyncOperation.allowSceneActivation = false;
 
-         // 로딩 상태 체크 및 업데이트
-         while (!asyncOperation.isDone)
-         {
-            // 0.0f에서 0.9f까지 증가합니다.
-            //loadingbar.fillAmount = Mathf.Clamp01(asyncOperation.progress / 0.9f);
+            // 로딩 상태 체크 및 업데이트
+            while (!asyncOperation.isDone)
+            {
+           
             if (asyncOperation.progress >= 0.9f)
-             {
-                 Debug.Log("다음 씬으로 이동");
-                //loadingbar.fillAmount = 1;
+                {
+                    Debug.Log("다음 씬으로 이동");
                 // 이전씬과 로딩씬 언로드
-                asyncOperation.allowSceneActivation = true;
-                
-
-                /*SceneManager.UnloadSceneAsync("LoadingScene");
-                SceneManager.UnloadSceneAsync(currentScene);*/
+                asyncOperation.allowSceneActivation = true;                                
             }
-             await Task.Yield(); // 비동기 루프에서 다른 작업이 실행될 수 있도록
+                await Task.Yield(); // 비동기 루프에서 다른 작업이 실행될 수 있도록
             //이거없으면 와일문무한반복? 으로 멈추는건지 몰라도 멈춰버림.
-         }
+            }
 
+        SkillManager.Instance.SkillSet();
         PlayManager.Instance.Init();
         ItemManager.Instance.Init();
-        SkillManager.Instance.SkillSet();       
-        
     }
 
     /*async void LoadSceneAsync(SceneName sceneName)

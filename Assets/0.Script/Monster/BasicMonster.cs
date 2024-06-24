@@ -46,10 +46,31 @@ namespace Monster
 
         }
 
+
+
         // Update is called once per frame
         void Update()
         {
             fsmState.OnUpdate();
         }
+
+        public void Attack()
+        {
+            float sqr = Vector3.SqrMagnitude(transform.position -  Target.position);
+            Debug.Log(sqr);
+            //사거리확인
+            if (sqr <= Range)
+            {
+                
+                Player.Player player = Target.GetComponent<Player.Player>();
+
+                if (player != null)
+                {
+                    Debug.Log("한대때림");
+                    player.Hit(Damage);
+                }
+            }            
+        }
+
     }
 }

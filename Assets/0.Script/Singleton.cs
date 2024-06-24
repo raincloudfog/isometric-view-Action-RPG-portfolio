@@ -32,7 +32,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour// , new
                 //Debug.Log(Find);
                 if (instance == null)
                 {
-                    Debug.Log("생성 하겠습니다.");
+                    //Debug.Log("생성 하겠습니다.");
                     GameObject Obj = new GameObject(typeof(T).Name);
                     instance = Obj.AddComponent<T>();
                     DontDestroyOnLoad ( instance );

@@ -1,13 +1,14 @@
 using Items;
 using Player;
 using Save;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using static SettingManager;
+
 
 public class ItemManager : Singleton<ItemManager>
 {
@@ -28,6 +29,8 @@ public class ItemManager : Singleton<ItemManager>
         inventoryUI.gameObject.SetActive(istrue);
     }
 
+
+    //에셋 로드 될때 불림
     public override void Init()
     {
         base.Init();
@@ -42,68 +45,92 @@ public class ItemManager : Singleton<ItemManager>
         //[Serializable]을 사용한 스크립트의 경우 초기화를 따로 안해줘도 자동으로 초기화가 됨.        
         //LoadInven();
 
-        inventoryUI = Instantiate(
-            SettingManager.Instance.UI.Find(ui => ui is InventoryUI) as InventoryUI);
-        
         canvas = FindObjectOfType<Canvas>();
 
+        inventoryUI = 
+        Instantiate(SettingManager.Instance.AInventoryUI).GetComponent<InventoryUI>();
+        Debug.Log("에셋 제대로 로드되어서 이걸로 사용");
+        inventoryUI.gameObject.SetActive(false);
+        
         inventoryUI.transform.SetParent(canvas.transform, false);   
 
         inventoryUI.Init();
+
+        //인벤토리에 있던 아이템들 전해주기.
+        for (int i = 0; i < _inventory.itemList.Length; i++)
+        {
+            inventoryUI.AddItem(i, _inventory.itemList[i]);
+        }
+
+        for (int i = 0; i < _Equipment.itemList.Length; i++)
+        {
+            inventoryUI.EquipItem(_Equipment.itemList[i]);
+        }
+
         //inventoryUI.transform.SetParent(SettingManager.Instance.canvas.transform, false);        
     }
 
 
+    //처음 로드 될때 불림. 일단 인벤토리 값을 전달 받는 함수.
     public void LoadInven(SaveData data = null)
     {
-        if (data == null)
+        _inventory = new Inventory();
+        _Equipment = new EquipmentInventory();
+
+        for (int i = 0; i < data.itemData.Length; i++)
         {
-            _inventory = _inventory = new Inventory(); 
-            _Equipment = new EquipmentInventory();
+            //Debug.Log(data.itemData[i].isNull);
+            int id = _inventory.AddItem(data.itemData[i]);
+        }
+
+        for (int i = 0; i < data.EquipData.Length; i++)
+        {
+            _Equipment.EquipItem(data.EquipData[i].type,data.EquipData[i]);
+        }
+
+
+    }
+
+    //해당 슬롯에 아이템 넣어줄때
+    public void AddItem(int id, ItemData item)
+    {
+        _inventory.AddItem(id, item);
+        inventoryUI.AddItem(id, item);
+        SaveManager.Instance.Save();
+    }
+
+    public void AddItem(ItemData item)
+    {
+        //해당 번호의 인벤토리 슬롯에 아이템
+       // Debug.Log("받은 아이템 확인" + item);
+       // Debug.Log("인벤토리 확인" + _inventory.IsFullItem());
+        int id =  _inventory.AddItem(item);
+        if(id < 0)
+        {
         }
         else
         {
-            _inventory = data.inventory;
-            _Equipment = data.equipment;
-        }
-        
-        
-    }
-
-    public void LoadInvenUI()
-    {
-        for (int i = 0; i < _inventory.ItemCheckList.Count; i++)
-        {
-            AddItem( _inventory.SettingItem(i));
-            inventoryUI.EquipItem(_Equipment.Equipment[(eEquipmentType)i]);
-        }
-    }
-
-    public void AddItem(Item item)
-    {
-        if(_inventory.IsFullItem())
-        {
-            Debug.Log("아이템 꽉차있음");
-            return;
+            inventoryUI.AddItem(id, item);
+            SaveManager.Instance.Save();
         }
 
-        //해당 번호의 인벤토리 슬롯에 아이템
-        int id =  _inventory.AddItem(item);
-        inventoryUI.AddItem(id,item);
-        
     }
 
     public void OnOffInventory()
     {
         bool isOnOff = !inventoryUI.gameObject.activeSelf;
-        Debug.Log(isOnOff + "인벤토리 켜기 / 끄기");
+
+       // Debug.Log(isOnOff + "인벤토리 켜기 / 끄기");
         inventoryUI.gameObject.SetActive(isOnOff);
+        GameData.isOpenUI = inventoryUI.gameObject.activeSelf;
+
     }
 
     public void DropItem(int id)
     {
         _inventory.DropItem(id);
-        
+        SaveManager.Instance.Save();
+
     }
 
     #region 이전 코드

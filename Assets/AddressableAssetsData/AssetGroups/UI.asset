@@ -17,14 +17,14 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 44d014912322d2b40a0f6b1752d2de7f
   m_SerializeEntries:
-  - m_GUID: 2465c46b5c2ce1a45b9604f11c8a09d5
-    m_Address: Assets/Package/UI/Inventory.prefab
+  - m_GUID: e61fd0a0059bcd140baab889ead4f3ac
+    m_Address: Assets/Packege/UI/Inventory.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 48d2ac4efd6c75941bb9f699e195f5c4
-    m_Address: Assets/Package/UI/PlayerUI.prefab
+  - m_GUID: 4cfb2261070a10d44bf7f04892ab868d
+    m_Address: Assets/Packege/UI/PlayerUI.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI

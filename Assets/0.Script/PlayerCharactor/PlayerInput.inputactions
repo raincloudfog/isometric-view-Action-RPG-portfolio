@@ -25,12 +25,12 @@
                 },
                 {
                     "name": "Inventory",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "1e83e2f3-2c45-4346-a945-47297dc451b3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -117,7 +117,7 @@
                     "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "PC",
                     "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false

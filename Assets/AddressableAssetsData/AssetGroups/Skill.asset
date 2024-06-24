@@ -17,26 +17,26 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: a47ef2baf07aadd4997e2fe56ae86c92
   m_SerializeEntries:
-  - m_GUID: aa8913342e935e144b3775a12da3a945
-    m_Address: Assets/Package/Skill/Ground Hit.prefab
+  - m_GUID: b090c6a72861c2d45adc2b8bca2f75b1
+    m_Address: Assets/Packege/Skill/Ground Hit.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Skill
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 77cc781821377f6478a8de987559cc31
-    m_Address: Assets/Package/Skill/Heal.prefab
+  - m_GUID: b07d82f7d11a8354291b7609bc78d2f4
+    m_Address: Assets/Packege/Skill/Heal.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Skill
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 798c048918c386848a162d6878e2e1d5
-    m_Address: Assets/Package/Skill/Starfall.prefab
+  - m_GUID: cbcea512329dbbd4aa79b4649ad64453
+    m_Address: Assets/Packege/Skill/Starfall.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Skill
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4007c6e4b45d0674591bedb42d0dd90f
-    m_Address: Assets/Package/Skill/Teleport.prefab
+  - m_GUID: fa3cd8d6aaefd0e4c95ee49411ddd3bb
+    m_Address: Assets/Packege/Skill/Teleport.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Skill

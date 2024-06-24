@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -37,7 +38,7 @@ public class TitleManager : MonoBehaviour
         buttons[2].onClick.AddListener(GameExit);
         CharactorName.characterLimit = 8; // ±ÛÀÚ¼ö Á¦ÇÑ
         CharactorName.onValueChanged.AddListener(
-            (word) => CharactorName.text = Regex.Replace(word, @"[^0-9a-zA-z°¡-ÆR", ""));
+            (word) => CharactorName.text = Regex.Replace(word, @"[^0-9a-zA-z°¡-ÆR]", ""));
         //Æ¯¼ö¹®ÀÚ ÇÊÅÍ
         CharactorName.onEndEdit.AddListener(InputName);
 
@@ -94,6 +95,14 @@ public class TitleManager : MonoBehaviour
 
     public void InputName(string Name)
     {
+        if(Name == null | Name =="")
+        {
+            OnOffNewCharactor(false);
+            return;
+
+        }
+
+
         SaveManager.Instance.NewSave(Name);
         selectCharactors[GameData.playerNumber].CreateCharactor(Name);
         OnOffNewCharactor(false);

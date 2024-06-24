@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ItemSprite
+  m_EditorClassIdentifier: 
+  m_GroupName: ItemSprite
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 47ea4242e8ff97949b85de7fbd51b6ec
+  m_SerializeEntries:
+  - m_GUID: 0ac5944c1a5851b47a94800aa3087cd3
+    m_Address: Assets/Packege/ItemImg/ItemObj/weapon1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb377222c6d7ed24bbeaf1f63b8b8fbe
+    m_Address: Assets/Packege/ItemImg/ItemObj/pants1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7190205a1f1f6e74fa3359c9fba62868
+    m_Address: Assets/Packege/ItemImg/ItemObj/helmet3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 928cb4452632c144a90d6fe334dc192b
+    m_Address: Assets/Packege/ItemImg/ItemObj/helmet4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e443c9d3cd9f6c3468e43c82a360ec8a
+    m_Address: Assets/Packege/ItemImg/ItemObj/helmet2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4b5704907e046243bbe301fd6a8c302
+    m_Address: Assets/Packege/ItemImg/ItemObj/pants3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1193a0fcd677c29469d47523a6799638
+    m_Address: Assets/Packege/ItemImg/ItemObj/weapon3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 32c52c545e4b4964b914ad83a2963d58
+    m_Address: Assets/Packege/ItemImg/ItemObj/Armor1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ae3c2063f4c42d408c8fd3018cd5bc2
+    m_Address: Assets/Packege/ItemImg/ItemObj/Armor4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8174b90211ea4f5458f92d62f8f006ea
+    m_Address: Assets/Packege/ItemImg/ItemObj/Boots1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ab8266b31c04e740bb440ac1124de54
+    m_Address: Assets/Packege/ItemImg/ItemObj/pants2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 189a7816a66b2e24e9866a18ce90aefd
+    m_Address: Assets/Packege/ItemImg/ItemObj/Armor2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8fb253fd6ba80240b5dc952eeb51e78
+    m_Address: Assets/Packege/ItemImg/ItemObj/pants4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0394d9929f446414c9623208f639d498
+    m_Address: Assets/Packege/ItemImg/ItemObj/weapon4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f44ebcf6e73b92c47a97fbef2ae34afd
+    m_Address: Assets/Packege/ItemImg/ItemObj/Armor3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 832a74f98cde02346b7083d64f1aaf83
+    m_Address: Assets/Packege/ItemImg/ItemObj/helmet1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 555e43e734905c6478babcde28be9bc7
+    m_Address: Assets/Packege/ItemImg/ItemObj/weapon2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f015cc7634a9754e9b6c30e536c40a7
+    m_Address: Assets/Packege/ItemImg/ItemObj/Boots4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ace5e8ec5d8ed740a0375254099e802
+    m_Address: Assets/Packege/ItemImg/ItemObj/Boots3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f55141b23cc9f664ab951bec74131702
+    m_Address: Assets/Packege/ItemImg/ItemObj/Boots2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: dad37fb1abb7e934181a19b105dbe965, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: a75cbc040b966584389f2af7444b35b6, type: 2}
+    - {fileID: 11400000, guid: ad2c2dcbc7c95be46a1755a6c85c9f22, type: 2}

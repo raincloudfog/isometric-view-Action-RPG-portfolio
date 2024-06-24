@@ -1,7 +1,7 @@
 using Items;
+using Save;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,22 +23,15 @@ public class InventoryUI : MonoBehaviour , IUserInterface
         if(slotSpace != null)
         {
             slots = slotSpace.GetComponentsInChildren<Slot>();
-            if (slots != null || slots.Length == 0)
+            for (int i = 0; i < slots.Length; i++)
             {
-                Debug.Log("슬롯이 부족함.");
-            }
-            else
-            {
-                for (int i = 0; i < slots.Length; i++)
-                {
-                    slots[i].id = i;
-                }
+                slots[i].id = i;
             }
         }
         if(equipSpace != null)
         {
             Slot[] equipslots = equipSpace.GetComponentsInChildren<Slot>();
-            Debug.Log(equipslots.Length + " equipslots.Length");
+           // Debug.Log(equipslots.Length + " equipslots.Length");
 
             if(equipslots.Length > 0)
             {
@@ -51,36 +44,70 @@ public class InventoryUI : MonoBehaviour , IUserInterface
             }
         }
 
-        Debug.Log(equipSlot.Count + " equipSlot.Count");
+       // Debug.Log(equipSlot.Count + " equipSlot.Count");
 
     }
 
-    public void EquipItem(Item item)
+    //아이템 장착 , 로드했을시 장착용
+    public void EquipItem(ItemData item)
     {
-        equipSlot[item.type].SetItem(item);
+         equipSlot[item.type].SetItem(item);
+        PlayManager.Instance.player.EquipChangeStat(item.type,item.Lank);
+        PlayManager.Instance.player.HealthInit();
+
     }
 
-    public void EquipItem(int slotid, ref Item item)
+
+    //아이템 장착 인벤토리에 있던 아이템 장착
+    public void EquipItem(int slotid, ref ItemData item)
     {
-        Item getitem = null;
+        ItemData getitem = null;
 
         if(ItemManager.Instance._inventory.IsFullItem())
         {
-            Debug.Log("아이템 해제 불가 (인벤토리 꽉차있음)");
+            //Debug.Log("아이템 해제 불가 (인벤토리 꽉차있음)");
         }
         else
         {
-            getitem = equipSlot[item.type].GetItem();
-            Item setitem = ItemManager.Instance._inventory.GetItem(slotid);
-            ItemManager.Instance._Equipment.EquipItem(item.type, setitem);
+            ItemData setitem = ItemManager.Instance._inventory.GetItem(slotid);
+            
+            if(ItemManager.Instance._Equipment == null)
+            {
+                Debug.Log("장비가 비었습니다.");
+            }
+            getitem = ItemManager.Instance._Equipment.EquipItem(item.type, setitem);
             equipSlot[item.type].SetItem(item);
-            item = getitem;
 
-            //ItemManager.Instance._inventory.AddItem(getitem);
+            if (PlayManager.Instance.player)
+            {
+                PlayManager.Instance.player.UnEquipItem(getitem.type, getitem.Lank);
+                PlayManager.Instance.player.EquipChangeStat(item.type, item.Lank);
+            }
+
+            item = getitem;            
+             ItemManager.Instance.AddItem(slotid, item);
+            SaveManager.Instance.Save();
         }
+    }
 
+    //아이템 해제
+    public void UnEquipItem(ItemData item)
+    {
+        if (ItemManager.Instance._inventory.IsFullItem())
+        {
+            //Debug.Log("아이템 해제 불가 (인벤토리 꽉차있음)");
+        }
+        else
+        {
+            if (PlayManager.Instance.player)
+            {
+                PlayManager.Instance.player.UnEquipItem(item.type, item.Lank);
 
-        //return getitem;
+            }
+            ItemManager.Instance._Equipment.UnEquipItem(item.type);
+             SaveManager.Instance.Save();
+
+        }
     }
 
     /// <summary>
@@ -88,19 +115,17 @@ public class InventoryUI : MonoBehaviour , IUserInterface
     /// </summary>
     public void DropItem()
     {
-         IsDrop = !IsDrop;
-
         if (IsDrop)
         {
             IsDrop = false;
             var dropButtonColor = DropButton.image;
-            dropButtonColor.color = Color.gray;
+            dropButtonColor.color = Color.white;
         }
         else
         {
             IsDrop = true;
             var dropButtonColor = DropButton.image;
-            dropButtonColor.color = Color.white;
+            dropButtonColor.color = Color.gray;
         }
     }    
 
@@ -109,8 +134,10 @@ public class InventoryUI : MonoBehaviour , IUserInterface
         
     }
 
-    public void AddItem(int id,Item item)
+    public void AddItem(int id, ItemData item)
     {
+        //Debug.Log("id : " + id + "item : " + item.id);
+       
         //Inventory.AddItem(item);
         slots[id].AddItem(item);
     }

@@ -22,6 +22,7 @@ public static class GameStateManager
     public static int lank;
     public static bool isDeath;
     public static bool isPortal;
+    public static bool isBossroomPortal;
     public static State gameState;
     public static PlayState playerState;
     public static StageManager stageManage;

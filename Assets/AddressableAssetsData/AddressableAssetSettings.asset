@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 510d621719897ee49b94c44b81159faa
   m_currentHash:
     serializedVersion: 2
-    Hash: 0cad21e241e2da4635d2e674e8344e59
+    Hash: bf0da3a34d8dacf1c4edb9adf03003a5
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aad7ea1e55ff35a4e9d263e7a34a10b9, type: 2}
   - {fileID: 11400000, guid: 2d298b6a3f435a54aa372079835dda24, type: 2}
   - {fileID: 11400000, guid: 5b17f8050fa8aa145b1bbecfe13343b7, type: 2}
+  - {fileID: 11400000, guid: 9d295c005262cbd43a071f6971ec2b89, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -95,6 +96,8 @@ MonoBehaviour:
     - UI
     - DropItem
     - Skill
+    - ItemSprite
+    - LoadingCanvas
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: c55ffb8ad831dd743aba2b63153ad082, type: 2}

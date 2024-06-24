@@ -34,6 +34,7 @@ namespace Monster
         public Fsm fsmState;
         public State state;
 
+        [SerializeField]
         protected Health health = new Health();
 
         public LayerMask TargetLayer;
@@ -48,31 +49,41 @@ namespace Monster
         {
         }
 
-        public void Init()
+        public virtual void Init()
         {
             Setting();
         }
 
         public virtual void Hit(int Damage)
         {
-            int beforeHP = health.HP;
-
+            if (health.isDeath) return;
 
             health.Hit(Damage);
 
+            int beforeHP = health.HP;
+
+
             //Debug.Log(gameObject.name + "의 체력 비교 전 / 후 : " + beforeHP + "/" + health.HP);
-            if(health.isDeath)
+            if (health.isDeath)
             {
                 GameStateManager.stageManage.MonsterDead();
                 Debug.Log(gameObject.name + "죽었다..");
                 ChageFSM(State.Death);
                 agent.isStopped = true;
+                Invoke("activeOff", 2);
+                return;
             }
+            
+        }
+
+        void activeOff()
+        {
+            gameObject.SetActive(false);
         }
 
         public virtual void Setting()
         {
-            health.Init(Hp);
+            health.Init(Hp, 0);
             agent.speed = moveSpeed;
         }
 
@@ -80,7 +91,11 @@ namespace Monster
 
         public virtual void Drop()
         {
-
+            DropItem dropItem = Instantiate( SettingManager.Instance.ADropitem.GetComponent<DropItem>());
+            dropItem.gameObject.SetActive(false);
+             dropItem.Init();
+            dropItem.gameObject.SetActive(true);
+            dropItem.transform.position = transform.position;
         }
     }
 }

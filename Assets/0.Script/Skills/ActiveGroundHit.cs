@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -13,16 +14,45 @@ namespace Skills
         public Transform[] HitPoint;
 
         public GroundHit[] groundHits;
-         
+
+
+        public override void Init(Player.Player player)
+        {
+            base.Init(player);
+            CoolTime = 2;
+            Manacost = 2;
+
+        }
+
+        private void Update()
+        {
+            if (CoolTimer <= 0)
+            {
+                isActive = true;
+                CoolTimer = 0;
+            }
+            else
+            {
+                CoolTimer -= Time.deltaTime;
+            }
+        }
 
         public override void Use()
         {
+            if (CoolTimer > 0)
+            {
+                return;
+            }
+
             base.Use();
             player.anim.Attack();
             player.UsingSkill(true);
             transform.position = player.transform.position;
             transform.rotation = Quaternion.Euler(player.transform.rotation.eulerAngles) ;
+            CoolTimer = CoolTime;
             StartCoroutine(Skill());
+            StartCoroutine(PlayManager.Instance.playerUI.SkillCool(SkillManager.SkillName.ActiveGroundHit, CoolTime));
+            isActive = false;
         }
 
         public override void SetSkill()

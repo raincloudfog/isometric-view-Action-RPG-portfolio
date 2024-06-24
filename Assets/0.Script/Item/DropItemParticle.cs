@@ -18,7 +18,7 @@ public class DropItemParticle : MonoBehaviour
         if (other.CompareTag("Ground"))
         {
             Vector3 spawnPosition = other.transform.position + new Vector3(0, 1.0f, 0); // y축으로 1 단위 위로 이동
-            GameObject obj = Array.Find(SettingManager.Instance.Dropitems, item => item.GetComponent<DropItem>() != null);
+            GameObject obj = SettingManager.Instance.ADropitem;
             DropItem dropItem = Instantiate(obj).GetComponent<DropItem>();
             dropItem.gameObject.transform.position = spawnPosition;
             Destroy(gameObject);
