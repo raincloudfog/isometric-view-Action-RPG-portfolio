@@ -130,18 +130,7 @@ namespace Monster
                 monster.agent.isStopped = false;
             }
             attackCheckTimer = 0;
-        }
-
-        bool AttackCheck()
-        {
-            if(monster.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f
-                && Vector3.Distance(monster.transform.position, Target.position) <= monster.Range)
-            {
-                return true;
-            }
-
-            return false;
-        }
+        }       
     }
 
     public class FSMDeath: Fsm

@@ -66,7 +66,7 @@ namespace Monster
             //Debug.Log(gameObject.name + "의 체력 비교 전 / 후 : " + beforeHP + "/" + health.HP);
             if (health.isDeath)
             {
-                GameStateManager.stageManage.MonsterDead();
+                //GameStateManager.stageManage.MonsterDead();
                 Debug.Log(gameObject.name + "죽었다..");
                 ChageFSM(State.Death);
                 agent.isStopped = true;

@@ -308,7 +308,7 @@ namespace Monster
             if (health.isDeath)
             {
                 pattonDamage = 0;
-                GameStateManager.stageManage.MonsterDead();
+                //GameStateManager.stageManage.MonsterDead();
                 Debug.Log(gameObject.name + "ав╬З╢ы..");
                 agent.isStopped = true;
 

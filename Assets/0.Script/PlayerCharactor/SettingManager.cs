@@ -16,6 +16,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 using UnityEngine.XR;
+using static UnityEditor.FilePathAttribute;
 
 public struct Itemid
 {
@@ -102,7 +103,6 @@ public class SettingManager : Singleton<SettingManager>
     AsyncOperationHandle<IList<IResourceLocation>> AUIHandle;
     AsyncOperationHandle<GameObject> ADropItemsHandle;
     AsyncOperationHandle<IList<IResourceLocation>> ASkillsHandle;
-    //AsyncOperationHandle<IList<IResourceLocation>> ASkillsHandle;
     AsyncOperationHandle<IList<IResourceLocation>> AItemSpriteHandle;
 
     [Header("addressableAsset")]
@@ -127,15 +127,14 @@ public class SettingManager : Singleton<SettingManager>
     {
         Debug.Log("셋팅 매니저 불림 ");
         Setting();
-        StartCoroutine( LoadAssetCoroutine());
+        //StartCoroutine( LoadAssetCoroutine());
         /*StartCoroutine(LoadUI());
         StartCoroutine( LoadSkill());
         StartCoroutine(LoadSprite());
         StartCoroutine(LoadDropitem());*/
-        //Test();
+
         Cursor.visible = true;
-        //await LoadAsset();
-        //CreatePlayerUI();
+        //await LoadAsset();      
     }
 
     // Update is called once per frame
@@ -157,18 +156,36 @@ public class SettingManager : Singleton<SettingManager>
         isLoadedAsset = true;
     } 
 
-    public void skillfind()
+    
+
+    public void ReleaseAddressable()
     {
-        /*IList<IResourceLocation> resourceLocations = ASkillsHandle.Result;
-        Debug.Log("스킬 로케이션 갯수 확인" + resourceLocations.Count);
+        Debug.Log("ASkillsHandle / AItemSpriteHandle / ADropItemsHandle / AUIHandle 이 유효한지 확인 " + ASkillsHandle.IsValid() + " / " + AItemSpriteHandle.IsValid() + " / " + ADropItemsHandle.IsValid() + " / " + AUIHandle.IsValid());
 
-        foreach (IResourceLocation location in resourceLocations)
+        if (ASkillsHandle.IsValid())
         {
-            Debug.Log("스킬 에셋 주소값 확인 : " + location);
-        }*/
-        
+            
+            Addressables.Release(ASkillsHandle);
+        }
 
+        if (AItemSpriteHandle.IsValid())
+        {
+            
+            Addressables.Release(AItemSpriteHandle);
+        }
 
+        if (ADropItemsHandle.IsValid())
+        {            
+            Addressables.Release(ADropItemsHandle);
+        }
+
+        if (AUIHandle.IsValid())
+        {
+            
+            Addressables.Release(AUIHandle);
+        }
+
+        Debug.Log("ASkillsHandle / AItemSpriteHandle / ADropItemsHandle / AUIHandle 이 유효한지 확인 " + ASkillsHandle.IsValid() + " / " + AItemSpriteHandle.IsValid() + " / " + ADropItemsHandle.IsValid() + " / " + AUIHandle.IsValid()) ;
     }
 
     void Test()
@@ -194,9 +211,7 @@ public class SettingManager : Singleton<SettingManager>
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
-            Debug.Log(testhandle.IsValid() + "테스트 핸들 초기화");
-
-            Addressables.Release(testhandle);
+            ReleaseAddressable();
         }
     }
 
@@ -288,7 +303,7 @@ public class SettingManager : Singleton<SettingManager>
         {
             Debug.LogError("로드된 위치 가져오기 실패: " + ASkillsHandle.Status);
         }
-        skillfind();
+
         /*// 단일 객체 로드 예시
         Addressables.LoadAssetAsync<GameObject>("Assets/Packege/NewSkill/Ground Hit.prefab").Completed +=
             (obj =>

@@ -11938,54 +11938,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &640429680
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 640429682}
-  - component: {fileID: 640429681}
-  m_Layer: 0
-  m_Name: SkillManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &640429681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640429680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cfe84e137bbe8941ab70a866dff3737, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActiveGroundHit: {fileID: 3678012521835514435, guid: aa8913342e935e144b3775a12da3a945, type: 3}
-  Telpo: {fileID: 4042041777597433494, guid: 4007c6e4b45d0674591bedb42d0dd90f, type: 3}
-  Heal: {fileID: 455955286951135608, guid: 77cc781821377f6478a8de987559cc31, type: 3}
-  Starfall: {fileID: 8375145027734766128, guid: 798c048918c386848a162d6878e2e1d5, type: 3}
---- !u!4 &640429682
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640429680}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &643641510
 GameObject:
   m_ObjectHideFlags: 0
@@ -50591,7 +50543,6 @@ SceneRoots:
   - {fileID: 1551494592}
   - {fileID: 705507995}
   - {fileID: 1964362876}
-  - {fileID: 640429682}
   - {fileID: 10725906}
   - {fileID: 2036927691}
   - {fileID: 1530398369}

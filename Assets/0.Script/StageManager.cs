@@ -122,16 +122,16 @@ public class StageManager : MonoBehaviour
         
     }    
 
-    public void MonsterDead()
+   /* public void MonsterDead()
     {
-        /*monsterNumber--;
+        monsterNumber--;
 
         if(monsterNumber <= 0)
         {
             Debug.Log("모든 몬스터가 죽었습니다.");
             GameStateManager.ChageState(GameStateManager.State.StageClear);
-        }*/
-    }
+        }
+    }*/
 
 
 }
